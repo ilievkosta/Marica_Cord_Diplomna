@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Windows.Forms;
 using System.Xml.Serialization;
 
 namespace Marica_Coord
@@ -145,27 +146,7 @@ namespace Marica_Coord
         }
 
 
-        public static IList<Cord> GeoToUTM(List<Cord> CoordinatesList)
-        {
-            for (int i = 0; i < CoordinatesList.Count; i++)
-            {
-
-                Transformations tr = new Transformations();
-
-                GeoPoint input = new GeoPoint(CoordinatesList[i].xC, CoordinatesList[i].yC);
-   
-                GeoPoint result = tr.TransformGeographicToUTM(input);
-
-               
-                CoordinatesList[i].xC = result.X;
-                CoordinatesList[i].yC = result.Y;
-
-
-            }
-
-
-            return CoordinatesList;
-        }
+        
 
         public static IList<Cord> GeographicToLambert(List<Cord> CoordinatesList)
         {
@@ -206,26 +187,7 @@ namespace Marica_Coord
 
             return CoordinatesList;
         }
-        public static IList<Cord> UTMtoGeo(List<Cord> CoordinatesList)
-        {
-            for (int i = 0; i < CoordinatesList.Count; i++)
-            {
-
-                Transformations tr = new Transformations();
-
-                GeoPoint input = new GeoPoint(CoordinatesList[i].xC, CoordinatesList[i].yC);
-                GeoPoint result = tr.TransformUTMToGeographic(input);
-
-                CoordinatesList[i].xC = result.X;
-                CoordinatesList[i].yC = result.Y;
-
-
-            }
-
-
-            return CoordinatesList;
-        }
-
+      
 
 
 
@@ -240,9 +202,58 @@ namespace Marica_Coord
             }
             return output;
         }
+        public static IList<Cord> DtoDMS(List<Cord> CoordinatesList)
+        {
+            Transformations tr = new Transformations();
+            for (int i = 0; i < CoordinatesList.Count; i++)
+            {
+                string x = tr.ConvertDecimalDegreesToDMS(CoordinatesList[i].xC);
+                
+                string y = tr.ConvertDecimalDegreesToDMS(CoordinatesList[i].yC);
+
+                try
+                {
+                    CoordinatesList[i].xC = double.Parse(x);
+                    CoordinatesList[i].yC = double.Parse(y);
+                } catch (Exception ex)
+                
+                {
+                    MessageBox.Show(ex.Message);
+                    
+                }
+
+            }
 
 
+            return CoordinatesList;
+        }
+
+        public static IList<Cord> DMStoD(List<Cord> CoordinatesList)
+        {
+            Transformations tr = new Transformations();
+            for (int i = 0; i < CoordinatesList.Count; i++)
+            {
+                try
+                {
+                    CoordinatesList[i].xC = tr.ConvertDMStoDecimalDegrees(Convert.ToString(CoordinatesList[i].xC));
+                    CoordinatesList[i].yC = tr.ConvertDMStoDecimalDegrees(Convert.ToString(CoordinatesList[i].yC));
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+
+                }
+
+            }
+
+
+            return CoordinatesList;
+        }
 
     }
+
+
+
 
 }

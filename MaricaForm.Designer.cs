@@ -69,13 +69,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtBoxJob = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.jobDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Coord = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.databaseGritBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.btnMineTo70 = new System.Windows.Forms.Button();
             this.buttonWgs84ToBGS2005Cad = new System.Windows.Forms.Button();
@@ -87,6 +82,11 @@
             this.textBoxMain = new System.Windows.Forms.TextBox();
             this.btnLoadFile = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.jobDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.databaseGritBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -106,7 +106,6 @@
             this.tabControl1.Size = new System.Drawing.Size(776, 550);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 0;
-           
             // 
             // tabPage1
             // 
@@ -309,7 +308,7 @@
             this.btnUTMtoGeo.Name = "btnUTMtoGeo";
             this.btnUTMtoGeo.Size = new System.Drawing.Size(84, 30);
             this.btnUTMtoGeo.TabIndex = 27;
-            this.btnUTMtoGeo.Text = "UTM -> Geo";
+            this.btnUTMtoGeo.Text = "DMS -> D";
             this.btnUTMtoGeo.UseVisualStyleBackColor = true;
             this.btnUTMtoGeo.Click += new System.EventHandler(this.btnUTMtoGeo_Click);
             // 
@@ -342,9 +341,9 @@
             this.buttonWGStoBGS.Name = "buttonWGStoBGS";
             this.buttonWGStoBGS.Size = new System.Drawing.Size(84, 31);
             this.buttonWGStoBGS.TabIndex = 25;
-            this.buttonWGStoBGS.Text = "Geo -> UTM";
+            this.buttonWGStoBGS.Text = "D -> DMS";
             this.buttonWGStoBGS.UseVisualStyleBackColor = true;
-            this.buttonWGStoBGS.Click += new System.EventHandler(this.buttonGeoToUTM_Click);
+            this.buttonWGStoBGS.Click += new System.EventHandler(this.buttonWGStoBGS_Click_1);
             // 
             // label9
             // 
@@ -502,30 +501,6 @@
             this.dataGridView1.TabIndex = 10;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Номер";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            // 
-            // dataDataGridViewTextBoxColumn
-            // 
-            this.dataDataGridViewTextBoxColumn.DataPropertyName = "Data";
-            this.dataDataGridViewTextBoxColumn.HeaderText = "Информация";
-            this.dataDataGridViewTextBoxColumn.Name = "dataDataGridViewTextBoxColumn";
-            // 
-            // dateDataGridViewTextBoxColumn
-            // 
-            this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
-            this.dateDataGridViewTextBoxColumn.HeaderText = "Дата";
-            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-            // 
-            // jobDataGridViewTextBoxColumn
-            // 
-            this.jobDataGridViewTextBoxColumn.DataPropertyName = "Job";
-            this.jobDataGridViewTextBoxColumn.HeaderText = "Обект";
-            this.jobDataGridViewTextBoxColumn.Name = "jobDataGridViewTextBoxColumn";
-            // 
             // Delete
             // 
             this.Delete.DataPropertyName = "Delete";
@@ -541,10 +516,6 @@
             this.Coord.Name = "Coord";
             this.Coord.Text = "Зареди";
             this.Coord.UseColumnTextForButtonValue = true;
-            // 
-            // databaseGritBindingSource
-            // 
-            this.databaseGritBindingSource.DataSource = typeof(Marica_Coord.DatabaseGrit);
             // 
             // button1
             // 
@@ -666,6 +637,34 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Номер";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            // 
+            // dataDataGridViewTextBoxColumn
+            // 
+            this.dataDataGridViewTextBoxColumn.DataPropertyName = "Data";
+            this.dataDataGridViewTextBoxColumn.HeaderText = "Информация";
+            this.dataDataGridViewTextBoxColumn.Name = "dataDataGridViewTextBoxColumn";
+            // 
+            // dateDataGridViewTextBoxColumn
+            // 
+            this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
+            this.dateDataGridViewTextBoxColumn.HeaderText = "Дата";
+            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            // 
+            // jobDataGridViewTextBoxColumn
+            // 
+            this.jobDataGridViewTextBoxColumn.DataPropertyName = "Job";
+            this.jobDataGridViewTextBoxColumn.HeaderText = "Обект";
+            this.jobDataGridViewTextBoxColumn.Name = "jobDataGridViewTextBoxColumn";
+            // 
+            // databaseGritBindingSource
+            // 
+            this.databaseGritBindingSource.DataSource = typeof(Marica_Coord.DatabaseGrit);
             // 
             // MaricaForm
             // 

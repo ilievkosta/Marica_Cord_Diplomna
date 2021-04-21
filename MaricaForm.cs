@@ -245,7 +245,9 @@ namespace Marica_Coord
                  "\n" +
                 "point1;34567,2;45671;12" +
                  "\n" +
-                 "point2;56785;32457;17";
+                 "point2;56785;32457;17"+
+                  "\n" +"WGS - пример 42,188385 25,958036" ;
+            
             MessageBox.Show(message);
         }
 
@@ -434,14 +436,7 @@ namespace Marica_Coord
             this.textBoxMain.Text = output;
         }
 
-        private void buttonGeoToUTM_Click(object sender, EventArgs e) 
-        { 
-        
-            Cord.GeoToUTM(CurrentCord);
-            string output = Cord.printCord(CurrentCord, ";", "\r\n");
-            this.textBoxMain.Text = output;
-
-        }
+  
 
         private void buttonBGS2005Cadto70_Click(object sender, EventArgs e)
         {
@@ -481,13 +476,7 @@ namespace Marica_Coord
             ValidateOK();
         }
 
-        private void btnUTMtoGeo_Click(object sender, EventArgs e)
-        {
-            Cord.UTMtoGeo(CurrentCord);
-            string output = Cord.printCord(CurrentCord, ";", "\r\n");
-            this.textBoxMain.Text = output;
-        }
-
+  
         private void buttonWgs84ToBGS2005Cad_Click(object sender, EventArgs e)
         {
             Cord.GeographicToLambert(CurrentCord);
@@ -502,6 +491,19 @@ namespace Marica_Coord
             this.textBoxMain.Text = output;
         }
 
-     
+      
+        private void buttonWGStoBGS_Click_1(object sender, EventArgs e)
+        {
+            Cord.DtoDMS(CurrentCord);
+            string output = Cord.printCord(CurrentCord, ";", "\r\n");
+            this.textBoxMain.Text = output;
+        }
+
+        private void btnUTMtoGeo_Click(object sender, EventArgs e)
+        {
+            Cord.DMStoD(CurrentCord);
+            string output = Cord.printCord(CurrentCord, ";", "\r\n");
+            this.textBoxMain.Text = output;
+        }
     }
 }
